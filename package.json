@@ -51,7 +51,7 @@
         "@exabyte-io/eslint-config": "2025.5.13-0",
         "@mat3ra/code": "2026.8.18-0",
         "@mat3ra/esse": "2026.8.18-2",
-        "@mat3ra/standata": "https://github.com/mat3ra/standata/releases/download/wip-c5ba9be/standata.tgz",
+        "@mat3ra/standata": "^2026.11.20-0",
         "@mat3ra/tsconfig": "2024.6.3-0",
         "@types/node": "^22.20.1",
         "@typescript-eslint/eslint-plugin": "^5.62.0",
