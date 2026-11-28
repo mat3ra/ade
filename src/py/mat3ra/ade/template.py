@@ -90,3 +90,24 @@ class Template(TemplateSchema, InMemoryEntitySnakeCase):
     def get_rendered_json(self, context: Optional[Dict[str, Any]] = None) -> str:
         self.render(context)
         return self.to_json()
+
+
+CUSTOM_SCRIPT_RUNNER = '''import json
+
+with open("material.json", "w") as file:
+    json.dump(json.loads(r"""{{ MATERIAL | default({}) | tojson }}"""), file)
+
+with open("user_script.py") as file:
+    exec(compile(file.read(), "user_script.py", "exec"))
+'''
+
+
+# The shell twin, rendered as `hello_world.sh`. The user's script is *sourced*, not run in a
+# subshell, so `module` stays available - rupy runs the runner the same way.
+CUSTOM_SCRIPT_RUNNER_SH = """#!/bin/bash
+cat > material.json <<'MATERIAL_JSON_EOF'
+{{ MATERIAL | default({}) | tojson }}
+MATERIAL_JSON_EOF
+
+. ./user_script.sh
+"""
